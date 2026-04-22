@@ -1,0 +1,71 @@
+<style>
+ .btn-search {
+  background-color: #fe424d;
+  color: #fff;
+  border-radius: 25px;
+  padding: 0.4rem 1.2rem;
+  font-weight: 500;
+  border: none;
+  white-space: nowrap;
+ }
+ .btn-search:hover {
+  background-color: #e0323d;
+  color: #fff;
+ }
+.btn-search i {
+  display: inline;
+  margin-right: 0.4rem;
+}
+.search-inp{
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  min-width: 250px;
+}
+.navbar-search-form {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid" style="position: relative;">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass">WanderLust</i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Centered Search Bar -->
+    <form class="d-none d-md-flex navbar-search-form" role="search" action="/listings" method="GET">
+      <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" />
+       <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+    </form>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        
+        <!-- Mobile search bar (only shows on small screens) -->
+        <form class="d-flex d-md-none mt-2 mb-2" role="search" action="/listings" method="GET">
+          <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" />
+           <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
+        
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Add new Listing</a>
+        <% if(!currUser) {%>
+        <a class="nav-link"  href="/signup"><b>Sign up</b></a>
+        <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %>
+         <% if(currUser) {%>
+        <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% } %>
+        
+      </div>
+    </div>
+  </div>
+</nav>
