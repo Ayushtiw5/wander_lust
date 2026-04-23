@@ -56,8 +56,8 @@ module.exports.showListing = async (req, res) => {
     let {id} = req.params;
     const listing = await Listing.findById(id).populate({path: "reviews",populate: {path: "author",},}).populate("owner");
     if(!listing){
-        req.flash("error", "listing you requested is not exist")
-        res.redirect("/listing");
+        req.flash("error", "listing you requested is not exist");
+        return res.redirect("/listings");
     }
     console.log(listing);
     res.render("listings/show.ejs", {listing});
@@ -84,10 +84,10 @@ module.exports.editListing = async (req, res) => {
     let {id} = req.params;
     const listing = await Listing.findById(id);
     if(!listing){
-        req.flash("error", "listing you requested is not exist")
-        res.redirect("/listing");
+        req.flash("error", "listing you requested is not exist");
+        return res.redirect("/listings");
     }
-    let originalImageUrl = listing.image.url;
+    let originalImageUrl = listing.image && listing.image.url ? listing.image.url : "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60";
     originalImageUrl = originalImageUrl.replace("/upload", "/upload/h_300,w_250");
     res.render("listings/edit.ejs", { listing, originalImageUrl });
 }
