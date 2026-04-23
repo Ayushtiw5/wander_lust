@@ -1,4 +1,5 @@
 const cloudinary = require("cloudinary").v2;
+const cloudinaryModule = require("cloudinary");
 
 let CloudinaryStorage;
 try {
@@ -19,7 +20,7 @@ cloudinary.config({
 
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary: cloudinaryModule,
   params: {
     folder: 'wanderlust_DEV',
     allowedFormats: ["png", "jpg", "jpeg"],
