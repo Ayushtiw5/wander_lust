@@ -1,0 +1,118 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .home-body {
+        margin-top: -1.5rem; /* Offset the container margin */
+        padding: 0;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%); /* Center full-width across container */
+    }
+
+    .hero-section {
+        height: 90vh;
+        width: 100%;
+        background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url("/wanderlust_hero_background_1776929130690.png");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        position: relative;
+    }
+
+    .hero-content {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 3rem;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        max-width: 800px;
+        margin: 0 1rem;
+        animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -1px;
+    }
+
+    .hero-quote {
+        font-size: 1.5rem;
+        font-style: italic;
+        font-weight: 300;
+        margin-bottom: 2.5rem;
+        color: #f0f0f0;
+    }
+
+    .hero-btns {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-hero {
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 2rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-explore {
+        background-color: #fe424d;
+        color: white;
+        border: none;
+    }
+
+    .btn-explore:hover {
+        background-color: #ff5a5f;
+        transform: scale(1.05);
+        color: white;
+    }
+
+    .btn-outline-hero {
+        background-color: transparent;
+        color: white;
+        border: 2px solid white;
+    }
+
+    .btn-outline-hero:hover {
+        background-color: white;
+        color: #222;
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+        .hero-title { font-size: 2.5rem; }
+        .hero-quote { font-size: 1.1rem; }
+        .hero-content { padding: 2rem 1.5rem; }
+    }
+</style>
+
+<div class="home-body">
+    <div class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">WanderLust</h1>
+            <p class="hero-quote">"The world is a book, and those who do not travel read only one page."</p>
+            <div class="hero-btns">
+                <a href="/listings" class="btn-hero btn-explore">Explore Destinations</a>
+                <% if(!currUser) { %>
+                    <a href="/signup" class="btn-hero btn-outline-hero">Sign Up</a>
+                    <a href="/login" class="btn-hero btn-outline-hero">Log In</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>

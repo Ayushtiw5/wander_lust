@@ -33,7 +33,8 @@
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
   <div class="container-fluid" style="position: relative;">
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass">WanderLust</i></a>
+    <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"> WanderLust</i></a>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,7 +47,6 @@
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        
         <!-- Mobile search bar (only shows on small screens) -->
         <form class="d-flex d-md-none mt-2 mb-2" role="search" action="/listings" method="GET">
           <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" />
@@ -56,6 +56,7 @@
       </div>
 
       <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings">Explore</a>
         <a class="nav-link" href="/listings/new">Add new Listing</a>
         <% if(!currUser) {%>
         <a class="nav-link"  href="/signup"><b>Sign up</b></a>

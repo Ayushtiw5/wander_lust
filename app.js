@@ -93,6 +93,10 @@ app.use((req, res, next) => {
 
 
 //routes
+app.get("/", (req, res) => {
+    res.render("listings/home.ejs");
+});
+
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter)
 app.use("/", userRouter);
