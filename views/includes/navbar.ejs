@@ -62,6 +62,7 @@
         <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
          <% if(currUser) {%>
+        <span class="nav-link text-dark" style="cursor: default;">Hi, <b><%= currUser.username %></b></span>
         <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
         

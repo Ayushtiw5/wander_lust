@@ -64,12 +64,26 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
-    let url = req.file.path;
-    let filename = req.file.filename;
+    console.log("req.file content:", req.file);
+    if (!req.file) {
+        req.flash("error", "Image is required!");
+        return res.redirect("/listings/new");
+    }
+    
+    // Some versions of multer-storage-cloudinary use .url, some use .path
+    let url = req.file.path || req.file.url || req.file.secure_url;
+    let filename = req.file.filename || req.file.public_id;
+
+    // Delete image from body if it exists to prevent conflict with our manual assignment
+    if (req.body.listing && req.body.listing.image) {
+        delete req.body.listing.image;
+    }
 
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
-    newListing.image = {url, filename};
+    newListing.image = { url, filename };
+
+    console.log("New Listing Image Object:", newListing.image);
 
     // Geocode the location
     let locationStr = `${newListing.location}, ${newListing.country}`;
@@ -94,12 +108,18 @@ module.exports.editListing = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
     let {id} = req.params;
+    
+    // Remove image from body to prevent it from overwriting our DB value
+    if (req.body.listing && req.body.listing.image) {
+        delete req.body.listing.image;
+    }
+
     let listing = await Listing.findByIdAndUpdate(id, {...req.body.listing});
 
     if(typeof req.file !== "undefined"){
-    let url = req.file.path;
-    let filename = req.file.filename;
-    listing.image = {url, filename};
+        let url = req.file.path || req.file.url || req.file.secure_url;
+        let filename = req.file.filename || req.file.public_id;
+        listing.image = { url, filename };
     }
 
     // Re-geocode on location update
