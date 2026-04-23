@@ -22,11 +22,14 @@
   min-width: 250px;
 }
 .navbar-search-form {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
+  margin: 0 auto;
+}
+.navbar-search-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
 </style>
@@ -40,10 +43,12 @@
     </button>
 
     <!-- Centered Search Bar -->
-    <form class="d-none d-md-flex navbar-search-form" role="search" action="/listings" method="GET">
-      <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" />
-       <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-    </form>
+    <div class="navbar-search-container d-none d-md-flex">
+      <form class="d-flex navbar-search-form" role="search" action="/listings" method="GET">
+        <input class="form-control me-2 search-inp" type="search" name="search" placeholder="Search destinations" value="<%= typeof search !== 'undefined' ? search : '' %>" />
+         <button class="btn btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+      </form>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">

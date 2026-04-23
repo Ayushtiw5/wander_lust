@@ -124,6 +124,19 @@ body {
 }
 .btns{
     display: flex;
+    flex-wrap: wrap;
+}
+@media (max-width: 768px) {
+    .show-img {
+        max-height: 40vh;
+    }
+    .btns {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .btns .ms-3 {
+        margin-left: 0 !important;
+    }
 }
 .show-card{
     padding-left: 0;
